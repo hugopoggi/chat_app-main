@@ -11,11 +11,11 @@ class ChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Chat"),
+        title: const Text("Chat"),
         actions: [
           IconButton(
             onPressed: () => signOut(context),
-            icon: Icon(Icons.logout),
+            icon: const Icon(Icons.logout),
           )
         ],
       ),
@@ -25,7 +25,7 @@ class ChatPage extends StatelessWidget {
             child: Container(
               child: ListView(
                 reverse: true,
-                children: [
+                children: const [
                   ListTile(
                     leading: CircleAvatar(
                       child: Text("N"),
@@ -41,8 +41,8 @@ class ChatPage extends StatelessWidget {
             children: [
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.all(4),
-                  child: TextField(
+                  padding: const EdgeInsets.all(4),
+                  child: const TextField(
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: "Digite sua mensagem...",
@@ -52,7 +52,7 @@ class ChatPage extends StatelessWidget {
               ),
               IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.send),
+                icon: const Icon(Icons.send),
               )
             ],
           )
