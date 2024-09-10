@@ -5,10 +5,19 @@ class LoginPage extends StatelessWidget {
   var txtEmail = TextEditingController();
   var txtPassword = TextEditingController();
 
-  void login(BuildContext context) {
-    FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: txtEmail.text, password: txtPassword.text);
-    Navigator.pushReplacementNamed(context, '/chat');
+  void login(BuildContext context) async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: txtEmail.text, password: txtPassword.text);
+
+      Navigator.pushReplacementNamed(context, '/chat');
+    } on FirebaseAuthException catch (ex) {
+      var snackBar = SnackBar(
+        content: Text(ex.message!),
+        backgroundColor: Colors.red,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 
   @override
@@ -27,7 +36,7 @@ class LoginPage extends StatelessWidget {
                 border: OutlineInputBorder(),
               ),
             ),
-            const SizedBox(
+            SizedBox(
               height: 6,
             ),
             TextField(
@@ -39,7 +48,7 @@ class LoginPage extends StatelessWidget {
               ),
               obscureText: true,
             ),
-            const SizedBox(
+            SizedBox(
               height: 6,
             ),
             SizedBox(
@@ -49,11 +58,11 @@ class LoginPage extends StatelessWidget {
                 onPressed: () => login(context),
               ),
             ),
-            const SizedBox(
+            SizedBox(
               height: 6,
             ),
             TextButton(
-              child: const Text("New User"),
+              child: Text("New User"),
               onPressed: () {
                 Navigator.pushNamed(context, '/register');
               },

@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ChatPage extends StatelessWidget {
-  const ChatPage({super.key});
+  var user = (FirebaseAuth.instance).currentUser;
 
   void signOut(BuildContext context) {
+    (FirebaseAuth.instance).signOut();
     Navigator.pushReplacementNamed(context, '/login');
   }
 
@@ -11,7 +13,7 @@ class ChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Chat"),
+        title: Text(user?.displayName ?? ''),
         actions: [
           IconButton(
             onPressed: () => signOut(context),
@@ -61,4 +63,3 @@ class ChatPage extends StatelessWidget {
     );
   }
 }
-
